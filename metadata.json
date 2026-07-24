@@ -1,0 +1,6 @@
+{
+  "name": "AetherOps - Autonomous AI Cloud Incident Manager",
+  "description": "Autonomous cloud infrastructure incident detection, multi-agent log & metric analysis, and self-healing remediation system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
