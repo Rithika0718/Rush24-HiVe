@@ -45,13 +45,12 @@
 ---
 
 ## 👥 Team Details
-| _Member 1_ | Frontend & Dashboard | `@handle` |
-| _Member 2_ | Backend & APIs | `@handle` |
-| _Member 3_ | AI / Agent Orchestration | `@handle` |
-| _Member 4_ | Documentation & Testing | `@handle` |
+| _Member 1_ |THASLIMA NASREEN J|
+| _Member 2_ |THAMARAI V |
+| _Member 3_ | RIHIKA K |
 
 
-## 🧩 Problem Statement
+##  Problem Statement
 
 ### Background
 Modern cloud platforms (AWS, Azure, Google Cloud) run thousands of interdependent services. A single failure — a memory leak, a crashed container, a saturated network link — can cascade into an outage affecting thousands of users within minutes. Cloud providers invest heavily in monitoring, but **monitoring is not the same as recovery**.
