@@ -448,6 +448,6 @@ SOFTWARE.
 
 <div align="center">
 
-*Built for [Hackathon Name] — 2026*
+*Built for [RUSH24HOUR] — 2026*
 
 </div>
