@@ -40,7 +40,7 @@
 18. [Demo](#-demo)
 19. [References](#-references)
 
-> Sections 9–19 are owned by other teammates and are stubbed below so the document reads as one coherent file — fill them in as those parts land.
+> Sections 9, 14, and 15 are owned by other teammates and are stubbed below so the document reads as one coherent file — fill them in as those parts land.
 
 ---
 
@@ -203,6 +203,247 @@ Root-Cause Report (Reporter Agent)
 ```
 
 ---
+## 🧠 AI/ML Workflow
+
+> Section owned by another teammate — stubbed here so the document reads as one coherent file. Fill in with the agent prompting strategy, model configuration, and reasoning pipeline details as that part lands.
+
+---
+
+## 📁 Folder Structure
+
+```
+hive-nebula/
+├── frontend/                   # React + Tailwind CSS client application
+│   ├── src/
+│   │   ├── components/         # Reusable UI components (dashboard widgets, graphs, panels)
+│   │   ├── flows/               # React Flow definitions for dependency and agent graphs
+│   │   ├── pages/               # Route-level views (Dashboard, Incident Detail, Reports)
+│   │   ├── charts/               # Recharts-based visualizations (latency, throughput, health)
+│   │   ├── hooks/                # Custom React hooks for state and data fetching
+│   │   ├── utils/                # Formatting, API clients, constants
+│   │   └── assets/               # Icons, images, and static design assets
+│   ├── public/
+│   └── package.json
+│
+├── backend/                     # FastAPI application server
+│   ├── api/                      # Route definitions and request/response schemas
+│   │   ├── routes/               # Endpoint modules (chaos, state, debate, plan, report)
+│   │   └── schemas/               # Pydantic models
+│   ├── core/                     # Application configuration and startup logic
+│   ├── services/                  # Business logic bridging API and agent layer
+│   ├── storage/                    # Shared memory state management (prototype persistence)
+│   └── main.py                     # FastAPI application entrypoint
+│
+├── agents/                        # LangGraph multi-agent orchestration layer
+│   ├── monitor_agent/               # Anomaly detection and telemetry ingestion
+│   ├── dependency_agent/            # Service dependency graph analysis
+│   ├── planner_agent/               # Recovery strategy proposal and coordination
+│   ├── risk_agent/                  # Risk scoring and impact assessment
+│   ├── resource_agent/              # Resource availability and constraint evaluation
+│   ├── recovery_agent/              # Recovery action execution
+│   ├── documentation_agent/         # Root Cause Analysis report generation
+│   └── graph.py                     # LangGraph orchestration graph definition
+│
+├── utils/                          # Shared utilities used across backend and agents
+│   ├── telemetry_simulator.py        # Cloud Digital Twin telemetry generator
+│   └── logger.py
+│
+├── assets/                          # Repository-level media (diagrams, screenshots, demo assets)
+│
+├── .env.example
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## ⚙️ Installation Guide
+
+### Clone Repository
+
+```bash
+git clone https://github.com/Rithika0718/Rush24-HiVe.git
+cd Rush24-HiVe
+```
+
+### Frontend Setup
+
+```bash
+cd frontend
+npm install
+```
+
+### Backend Setup
+
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### Environment Variables
+
+Create a `.env` file in the `backend/` directory:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key
+BACKEND_PORT=8000
+FRONTEND_ORIGIN=http://localhost:3000
+LOG_LEVEL=info
+```
+
+Create a `.env` file in the `frontend/` directory:
+
+```env
+VITE_API_BASE_URL=http://localhost:8000
+```
+
+### Run Frontend
+
+```bash
+cd frontend
+npm run dev
+```
+
+### Run Backend
+
+```bash
+cd backend
+uvicorn main:app --reload --port 8000
+```
+
+---
+
+## 🧭 Usage Guide
+
+1. **Open Dashboard** — Launch the frontend to view the live Cloud Digital Twin, service topology, and system health metrics.
+2. **Inject Incident** — Trigger a simulated incident (e.g., abnormal database latency) via the dashboard control panel.
+3. **Monitor Agent Detects Anomaly** — The Monitor Agent ingests telemetry and flags the deviation, initiating the incident workflow.
+4. **Dependency Analysis** — The Dependency Agent maps affected downstream services using the live topology graph.
+5. **AI Agents Debate** — The Risk, Resource, and Planner Agents evaluate multiple recovery strategies, weighing trade-offs in real time.
+6. **Planner Selects Strategy** — Consensus is reached, and the Planner Agent finalizes the optimal recovery plan.
+7. **Recovery Executes** — The Recovery Agent orchestrates the selected remediation actions against the affected services.
+8. **Dashboard Updates** — The frontend reflects real-time state changes as services recover.
+9. **Root Cause Report Generated** — The Documentation Agent compiles a structured RCA report summarizing the incident timeline, decision rationale, and resolution steps.
+
+---
+
+## 🔌 API Documentation
+
+| Method | Endpoint             | Description                                                            |
+|--------|-----------------------|-------------------------------------------------------------------------|
+| POST   | `/inject-chaos`       | Injects a simulated incident (e.g., latency spike) into the Cloud Digital Twin. |
+| GET    | `/system-state`       | Returns the current state of all monitored services and dependencies.  |
+| GET    | `/agent-debate`       | Returns the live reasoning trace and strategy evaluation from the agent debate. |
+| POST   | `/execute-plan`       | Executes the recovery plan selected by the Planner Agent.               |
+| GET    | `/incident-report`    | Retrieves the generated Root Cause Analysis report for a given incident. |
+
+---
+
+## 🔒 Security Measures
+
+> Section owned by another teammate — stubbed here so the document reads as one coherent file. Fill in with authentication, input validation, and data-handling details as that part lands.
+
+---
+
+## 🧪 Testing & Performance
+
+> Section owned by another teammate — stubbed here so the document reads as one coherent file. Fill in with test coverage, load-testing results, and latency benchmarks as that part lands.
+
+---
+
+## 🧩 Challenges Faced
+
+- **Multi-agent communication** — Coordinating message passing and shared context across seven specialized agents without introducing race conditions or conflicting state writes.
+- **Shared memory synchronization** — Ensuring consistent read/write access to the prototype's in-memory state store under concurrent agent execution.
+- **Consensus generation** — Designing a debate protocol that allows agents with competing objectives (risk minimization vs. recovery speed) to converge on a single actionable strategy.
+- **Cloud telemetry simulation** — Building a realistic Cloud Digital Twin capable of producing believable cascading failure patterns for demonstration purposes.
+- **Prompt engineering** — Tuning agent prompts to produce structured, deterministic outputs suitable for programmatic orchestration rather than free-form text.
+- **Real-time state updates** — Synchronizing backend state transitions with frontend visualizations without introducing latency or stale renders.
+- **Limited development time** — Balancing architectural completeness with the constraints of a fixed build window.
+
+---
+
+## 🚀 Future Scope
+
+### Technical Enhancements
+
+- Redis-backed state management for distributed, low-latency shared memory
+- Kafka-based event streaming for agent communication and telemetry ingestion
+- Kubernetes-native deployment for production-grade orchestration and scaling
+- Enterprise authentication (SSO, RBAC) for multi-tenant environments
+- Cross-cloud orchestration spanning AWS, Azure, and GCP
+- Continuous learning pipeline to refine agent decision-making from historical incidents
+
+### Business Expansion
+
+- **Healthcare** — Incident response for clinical infrastructure and patient-data systems
+- **Manufacturing** — Autonomous recovery for industrial control and IoT networks
+- **Government Infrastructure** — Resilience orchestration for public sector cloud systems
+- **Financial Services** — Incident management for transaction-critical platforms
+- **Smart Cities** — Coordinated recovery across interconnected municipal systems
+
+---
+
+## 🎬 Demo
+
+| Asset                  | Preview                                      |
+|------------------------|-----------------------------------------------|
+| Dashboard Screenshot    | `assets/dashboard-screenshot.png`             |
+| Incident Detection      | `assets/incident-detection.png`               |
+| AI Debate               | `assets/ai-debate.png`                        |
+| Recovery Execution      | `assets/recovery-execution.png`               |
+| Root Cause Analysis     | `assets/root-cause-analysis.png`              |
+| Demo Video              | [Watch Demo](https://your-demo-video-link)    |
+| Live Deployment         | [Live App](https://your-deployment-link)      |
+| GitHub Repository       | [Source Code](https://github.com/Rithika0718/Rush24-HiVe) |
+
+---
+
+## 📚 References
+
+- [React Documentation](https://react.dev)
+- [FastAPI Documentation](https://fastapi.tiangolo.com)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [LangGraph Documentation](https://langchain-ai.github.io/langgraph/)
+- [Gemini API Documentation](https://ai.google.dev/gemini-api/docs)
+- [Google Cloud Monitoring Documentation](https://cloud.google.com/monitoring/docs)
+- [AWS CloudWatch Documentation](https://docs.aws.amazon.com/cloudwatch/)
+- [Azure Monitor Documentation](https://learn.microsoft.com/en-us/azure/azure-monitor/)
+- [Render Documentation](https://render.com/docs)
+- [Vercel Documentation](https://vercel.com/docs)
+- [Supabase Documentation](https://supabase.com/docs)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+```
+MIT License
+
+Copyright (c) 2026 HIVE Nebula Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 
 <div align="center">
