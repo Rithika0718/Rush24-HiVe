@@ -1,0 +1,6 @@
+{
+  "name": "HIVE Nebula - GCP Digital Twin",
+  "description": "Simulated Google Cloud Infrastructure state engine with incident injection, cascading dependency ripple effects, and automated resolution endpoints.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
